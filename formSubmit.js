@@ -1,5 +1,8 @@
 function parseFormAction(e) {
-    var formResponse = {};
+    var formResponse = {
+        "email": e.response.getRespondentEmail(),
+        "editlink": e.response.getEditResponseUrl(),
+    };
     var itemResponses = e.response.getItemResponses();
     for (var j = 0; j < itemResponses.length; j++) {
       var itemResponse = itemResponses[j];
