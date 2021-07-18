@@ -13,7 +13,7 @@ function parseFormAction(e) {
       }
     }
 
-    var url = "http://tiulimg-carpool.herokuapp.com/api/couples";
+    var url = "https://tiulimg-companion.herokuapp.com/api/couples";
     options = {
         "method": "post",
         "contentType": "application/json",
