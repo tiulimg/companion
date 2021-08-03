@@ -6,13 +6,23 @@ function parseFormAction(e) {
     var itemResponses = e.response.getItemResponses();
     for (var j = 0; j < itemResponses.length; j++) {
       var itemResponse = itemResponses[j];
+      var questionItem = itemResponse.getItem();
+      var itemType = questionItem.getType();
+      var title = questionItem.getTitle();
       var response = itemResponse.getResponse();
-      console.log('title: ' + itemResponse.getItem().getTitle() + ' response: ' + response);
+      console.log('title: ' + title + ' response: ' + response);
       if (typeof(response) === "string") {
-        formResponse[itemResponse.getItem().getTitle()] = response;  
+        formResponse[title] = response;  
+      }
+      else if (itemType = "CHECKBOX_GRID") {
+        formResponse[title] = {
+          "rows": questionItem.asCheckboxGridItem().getRows(),
+          "columns": questionItem.asCheckboxGridItem().getColumns(),
+          "values": JSON.stringify(response).trim(),
+        };
       }
       else {
-        formResponse[itemResponse.getItem().getTitle()] = JSON.stringify(response).trim();
+        formResponse[title] = JSON.stringify(response).trim();
       }
     }
 
